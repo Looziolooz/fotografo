@@ -4,33 +4,38 @@ import Image from "next/image";
 import { useState, useCallback } from "react";
 import { useLang } from "@/context/LangContext";
 
-const PHOTOS = [
-  { src: "/images/gallery/gallery-1.jpg", title: "Chiara & Marco", loc: "Montalcino, Toscana" },
-  { src: "/images/gallery/gallery-2.jpg", title: "Sofia & Alessandro", loc: "Positano, Costiera" },
-  { src: "/images/gallery/gallery-3.jpg", title: "Giulia & Andrea", loc: "Firenze" },
-  { src: "/images/gallery/gallery-4.jpg", title: "Emma & Luca", loc: "Siena, Toscana" },
-  { src: "/images/gallery/gallery-5.jpg", title: "Valentina & Matteo", loc: "Ravello" },
-  { src: "/images/gallery/gallery-6.jpg", title: "Alice & Giovanni", loc: "Lucca" },
-  { src: "/images/gallery/gallery-7.jpg", title: "Martina & Federico", loc: "San Gimignano" },
-  { src: "/images/gallery/gallery-8.jpg", title: "Francesca & Roberto", loc: "Capri" },
-  { src: "/images/gallery/gallery-9.jpg", title: "Elena & Davide", loc: "Val d'Orcia" },
+type Photo = { src: string; title: string; loc: string; tags: string[] };
+
+const PHOTOS: Photo[] = [
+  { src: "/images/gallery/gallery-1.jpg", title: "Chiara & Marco", loc: "Montalcino, Toscana", tags: ["toscana", "pellicola"] },
+  { src: "/images/gallery/gallery-2.jpg", title: "Sofia & Alessandro", loc: "Positano, Costiera", tags: ["costiera"] },
+  { src: "/images/gallery/gallery-3.jpg", title: "Giulia & Andrea", loc: "Firenze", tags: ["toscana"] },
+  { src: "/images/gallery/gallery-4.jpg", title: "Emma & Luca", loc: "Siena, Toscana", tags: ["toscana", "pellicola"] },
+  { src: "/images/gallery/gallery-5.jpg", title: "Valentina & Matteo", loc: "Ravello", tags: ["costiera", "pellicola"] },
+  { src: "/images/gallery/gallery-6.jpg", title: "Alice & Giovanni", loc: "Lucca", tags: ["toscana"] },
+  { src: "/images/gallery/gallery-7.jpg", title: "Martina & Federico", loc: "San Gimignano", tags: ["toscana", "pellicola"] },
+  { src: "/images/gallery/gallery-8.jpg", title: "Francesca & Roberto", loc: "Capri", tags: ["costiera"] },
+  { src: "/images/gallery/gallery-9.jpg", title: "Elena & Davide", loc: "Val d'Orcia", tags: ["toscana", "pellicola"] },
 ];
+
+const FILTER_TAGS = ["", "toscana", "costiera", "pellicola"];
 
 export default function Gallery() {
   const { t } = useLang();
-  const [filter, setFilter] = useState(t.gallery.filters[0]);
+  const [filterIdx, setFilterIdx] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const filtered = filter === t.gallery.filters[0] ? PHOTOS : PHOTOS;
+  const tag = FILTER_TAGS[filterIdx];
+  const filtered = tag ? PHOTOS.filter((p) => p.tags.includes(tag)) : PHOTOS;
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
       if (lightbox === null) return;
       if (e.key === "Escape") setLightbox(null);
-      if (e.key === "ArrowLeft") setLightbox((lightbox - 1 + PHOTOS.length) % PHOTOS.length);
-      if (e.key === "ArrowRight") setLightbox((lightbox + 1) % PHOTOS.length);
+      if (e.key === "ArrowLeft") setLightbox((lightbox - 1 + filtered.length) % filtered.length);
+      if (e.key === "ArrowRight") setLightbox((lightbox + 1) % filtered.length);
     },
-    [lightbox]
+    [lightbox, filtered.length]
   );
 
   return (
@@ -44,11 +49,11 @@ export default function Gallery() {
           <p>{t.gallery.desc}</p>
         </div>
         <div className="filters">
-          {t.gallery.filters.map((f) => (
+          {t.gallery.filters.map((f, i) => (
             <button
               key={f}
-              className={`pill ${filter === f ? "active" : ""}`}
-              onClick={() => setFilter(f)}
+              className={`pill ${filterIdx === i ? "active" : ""}`}
+              onClick={() => setFilterIdx(i)}
             >
               {f}
             </button>
@@ -92,8 +97,8 @@ export default function Gallery() {
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <div className="lightbox-img">
               <Image
-                src={PHOTOS[lightbox].src}
-                alt={PHOTOS[lightbox].title}
+                src={filtered[lightbox].src}
+                alt={filtered[lightbox].title}
                 fill
                 sizes="(max-width: 880px) 100vw, 60vw"
                 style={{ objectFit: "cover" }}
@@ -101,10 +106,10 @@ export default function Gallery() {
             </div>
             <div className="lightbox-meta">
               <div className="eyebrow">{t.gallery.eyebrow}</div>
-              <h3>{PHOTOS[lightbox].title}</h3>
-              <p>{PHOTOS[lightbox].loc}</p>
+              <h3>{filtered[lightbox].title}</h3>
+              <p>{filtered[lightbox].loc}</p>
               <p>
-                {lightbox + 1} {t.gallery.of} {PHOTOS.length}
+                {lightbox + 1} {t.gallery.of} {filtered.length}
               </p>
             </div>
           </div>
