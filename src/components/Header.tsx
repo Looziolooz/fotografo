@@ -69,7 +69,7 @@ export default function Header() {
             <span>/</span>
             <button onClick={() => setLang("en")} className={lang === "en" ? "active" : ""}>EN</button>
           </div>
-          <a href="#contatti" className="btn btn-primary" style={{ padding: "10px 22px", fontSize: "12px" }}>
+          <a href="#contatti" className="btn btn-primary">
             {t.header.cta}
           </a>
         </nav>

@@ -19,18 +19,10 @@ export default function Home() {
         <Hero />
         <Filosofia />
         <StatsStrip />
-        <div className="divider-filigree">
-          <span className="orn">~</span>
-        </div>
         <Gallery />
-        <div className="section-ornament">✦ ✦ ✦</div>
         <Servizi />
-        <div className="section-ornament">✦ ✦ ✦</div>
         <Testimonianze />
         <Diario />
-        <div className="divider-filigree">
-          <span className="orn">✦</span>
-        </div>
         <ContactForm />
         <ClosingQuote />
       </main>

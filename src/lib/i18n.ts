@@ -109,7 +109,7 @@ const IT: I18nDict = {
     ],
     cta: "Richiedi preventivo",
     brandSub: "Fotografia di Matrimoni",
-    mobileFoot: "Atelier Solari — Firenze / Positano",
+    mobileFoot: "Atelier Solari · Firenze / Positano",
   },
   hero: {
     eyebrow: "Atelier Solari",
@@ -126,7 +126,7 @@ const IT: I18nDict = {
   filosofia: {
     eyebrow: "La nostra filosofia",
     title: ["Ogni amore ha una ", "luce", " unica"],
-    par1: "Non cerchiamo la posa perfetta. Aspettiamo il momento in cui vi dimenticate che siamo lì — e allora accade la magia. Fotografiamo con pellicola medio formato e digitale, perché ogni strumento ha la sua anima.",
+    par1: "Non cerchiamo la posa perfetta. Aspettiamo il momento in cui vi dimenticate che siamo lì, e allora accade la magia. Fotografiamo con pellicola medio formato e digitale, perché ogni strumento ha la sua anima.",
     par2: "La Toscana con le sue colline senza tempo, la Costiera Amalfitana con la luce che danza sul mare: sono i nostri set preferiti. Ma il vero soggetto siete voi.",
     signature: "Lorenzo Solari",
     signatureSub: "Fotografo & Founder",
@@ -260,7 +260,7 @@ const IT: I18nDict = {
       emailLabel: "Email",
       emailPlaceholder: "La tua email",
       locationLabel: "Location del matrimonio",
-      locationPlaceholder: "Es. Montalcino, Siena — oppure non lo so ancora",
+      locationPlaceholder: "Es. Montalcino, Siena, oppure non lo so ancora",
       dateLabel: "Data (indicativa)",
       datePlaceholder: "Es. Primavera 2027",
       budgetLabel: "Budget indicativo",
@@ -278,7 +278,7 @@ const IT: I18nDict = {
   },
   closing: {
     quote: ["La luce perfetta non esiste. Esiste ", "la vostra", " luce."],
-    who: "— Atelier Solari",
+    who: "Atelier Solari",
   },
   footer: {
     desc: "Fotografia di matrimoni in Toscana e Costiera Amalfitana. Pellicola, medio formato, ricordi che durano.",
@@ -324,7 +324,7 @@ const EN: I18nDict = {
     ],
     cta: "Get a quote",
     brandSub: "Wedding Photography",
-    mobileFoot: "Atelier Solari — Florence / Positano",
+    mobileFoot: "Atelier Solari · Florence / Positano",
   },
   hero: {
     eyebrow: "Atelier Solari",
@@ -341,7 +341,7 @@ const EN: I18nDict = {
   filosofia: {
     eyebrow: "Our Philosophy",
     title: ["Every love has a unique ", "light", ""],
-    par1: "We don't chase the perfect pose. We wait for the moment you forget we're there — and then the magic happens. We shoot with medium format film and digital, because every tool has its soul.",
+    par1: "We don't chase the perfect pose. We wait for the moment you forget we're there, and then the magic happens. We shoot with medium format film and digital, because every tool has its soul.",
     par2: "Tuscany with its timeless hills, the Amalfi Coast with light dancing on the sea: these are our favorite sets. But the real subject is you.",
     signature: "Lorenzo Solari",
     signatureSub: "Photographer & Founder",
@@ -475,7 +475,7 @@ const EN: I18nDict = {
       emailLabel: "Email",
       emailPlaceholder: "Your email",
       locationLabel: "Wedding Location",
-      locationPlaceholder: "E.g. Montalcino, Siena — or I don't know yet",
+      locationPlaceholder: "E.g. Montalcino, Siena, or I don't know yet",
       dateLabel: "Date (estimated)",
       datePlaceholder: "E.g. Spring 2027",
       budgetLabel: "Estimated Budget",
@@ -488,12 +488,12 @@ const EN: I18nDict = {
     },
     success: {
       title: "Thank you!",
-      desc: "We'll reply within 24 hours. Check your inbox (and spam folder — we'd hate to miss each other).",
+      desc: "We'll reply within 24 hours. Check your inbox (and spam folder, we'd hate to miss each other).",
     },
   },
   closing: {
     quote: ["Perfect light doesn't exist. There's only ", "yours", "."],
-    who: "— Atelier Solari",
+    who: "Atelier Solari",
   },
   footer: {
     desc: "Wedding photography in Tuscany and the Amalfi Coast. Film, medium format, memories that last.",
