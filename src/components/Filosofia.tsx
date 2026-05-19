@@ -26,7 +26,7 @@ export default function Filosofia() {
             <h2 style={{ marginTop: 6 }}>
               {t.filosofia.title[0]}<em>{t.filosofia.title[1]}</em>{t.filosofia.title[2]}
             </h2>
-            <p>{t.filosofia.par1}</p>
+            <p><span className="dropcap">{t.filosofia.par1[0]}</span>{t.filosofia.par1.slice(1)}</p>
             <p>{t.filosofia.par2}</p>
             <div className="signature">
               {t.filosofia.signature}

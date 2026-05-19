@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useLang } from "@/context/LangContext";
-import type { Lang } from "@/lib/i18n";
 
 export default function Header() {
   const { t, lang, setLang } = useLang();

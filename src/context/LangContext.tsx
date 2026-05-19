@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { DICT, type Lang, type I18nDict } from "@/lib/i18n";
 
 type LangContextType = {
@@ -16,7 +16,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const t = DICT[lang];
 
   return (
-    <LangContext.Provider value={{ lang, setLang: useCallback(setLang, []), t }}>
+    <LangContext.Provider value={{ lang, setLang, t }}>
       {children}
     </LangContext.Provider>
   );

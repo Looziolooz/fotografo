@@ -72,6 +72,7 @@ export default function Gallery() {
                   style={{ width: "100%", height: "auto" }}
                 />
               </div>
+              <div className="photo-corners" />
               <div className="photo-caption">
                 <span className="t">{photo.title}</span>
                 <span className="l">{photo.loc}</span>
