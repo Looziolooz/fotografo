@@ -14,7 +14,7 @@ export default function Footer() {
             <p>{t.footer.desc}</p>
           </div>
           <div className="footer-col">
-            <h4>{t.footer.col1.title}</h4>
+            <div className="footer-col-title">{t.footer.col1.title}</div>
             <ul>
               {t.footer.col1.items.map((item) => (
                 <li key={item.label}><a href={item.href}>{item.label}</a></li>
@@ -22,7 +22,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="footer-col">
-            <h4>{t.footer.col2.title}</h4>
+            <div className="footer-col-title">{t.footer.col2.title}</div>
             <ul>
               {t.footer.col2.items.map((item) => (
                 <li key={item.label}><a href={item.href}>{item.label}</a></li>
@@ -30,7 +30,7 @@ export default function Footer() {
             </ul>
           </div>
           <div className="footer-col">
-            <h4>{t.footer.col3.title}</h4>
+            <div className="footer-col-title">{t.footer.col3.title}</div>
             <ul>
               {t.footer.col3.items.map((item) => (
                 <li key={item.label}><a href={item.href}>{item.label}</a></li>
