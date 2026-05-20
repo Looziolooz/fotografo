@@ -545,8 +545,8 @@ section { position: relative; }
   padding: 36px 0;
 }
 .stat-cell { padding: 0; border: 0; text-align: left; }
-.stat-cell:first-child .stat-num { font-size: clamp(64px, 8vw, 96px); letter-spacing: -0.04em; }
-.stat-cell:first-child .stat-label { font-size: 12px; margin-top: 12px; max-width: 22ch; }
+.stats-strip > .stat-cell:first-child .stat-num { font-size: clamp(64px, 8vw, 96px); letter-spacing: -0.04em; }
+.stats-strip > .stat-cell:first-child .stat-label { font-size: 12px; margin-top: 12px; max-width: 22ch; }
 
 .stat-cell:not(:first-child) {
   display: inline-flex; align-items: baseline; gap: 12px;
