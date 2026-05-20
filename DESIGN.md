@@ -130,6 +130,7 @@ Every design decision serves this. If it doesn't carry warmth or stillness, it d
 | 2026-05-20 | Risk 1 — two-voice typography (Fraunces italic em in DM Sans titles) | Differentiator vs peer landscape (Erich McVey monochrome / Koman cream-blush); ties to memorable-thing via handcrafted feel |
 | 2026-05-20 | Risk 2 — accent chroma bumped 0.14 → 0.16, hue 45 → 50, hero scrim warm gold cast | Sito identificabile da uno screenshot singolo; communicates "luce toscana" without saying it |
 | 2026-05-20 | Risk 3 — film grain 3% body overlay restored | Analog texture DM Sans alone can't carry; below perceptual threshold on photos |
+| 2026-05-20 | Stats strip torna a 4 celle uniformi con divisori verticali | Override utente del pattern Impeccable anchor-asimmetrico. Preferenza dichiarata: ritmo regolare, peso visivo identico. Editorial almanac > hero-metric SaaS rotto |
 
 ## Open items / not yet done
 - IntersectionObserver for `.reveal` classes (currently dead CSS — needs careful FOUC handling).
