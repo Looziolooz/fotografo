@@ -7,6 +7,7 @@ import Gallery from "@/components/Gallery";
 import Servizi from "@/components/Servizi";
 import Testimonianze from "@/components/Testimonianze";
 import Diario from "@/components/Diario";
+import Storia from "@/components/Storia";
 import ContactForm from "@/components/ContactForm";
 import ClosingQuote from "@/components/ClosingQuote";
 import Footer from "@/components/Footer";
@@ -22,6 +23,7 @@ export default function Home() {
         <Gallery />
         <Servizi />
         <Testimonianze />
+        <Storia />
         <Diario />
         <ContactForm />
         <ClosingQuote />
