@@ -88,11 +88,26 @@ export default function ContactForm() {
                 <div className="form-grid">
                   <div className="field">
                     <label htmlFor="nome">{t.contact.form.nameLabel}</label>
-                    <input id="nome" type="text" placeholder={t.contact.form.namePlaceholder} required />
+                    <input
+                      id="nome"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder={t.contact.form.namePlaceholder}
+                      required
+                    />
                   </div>
                   <div className="field">
                     <label htmlFor="email">{t.contact.form.emailLabel}</label>
-                    <input id="email" type="email" placeholder={t.contact.form.emailPlaceholder} required />
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      inputMode="email"
+                      placeholder={t.contact.form.emailPlaceholder}
+                      required
+                    />
                   </div>
 
                   {/* Bostadstyp — Venue Type */}
@@ -131,11 +146,22 @@ export default function ContactForm() {
 
                   <div className="field full">
                     <label htmlFor="location">{t.contact.form.locationLabel}</label>
-                    <input id="location" type="text" placeholder={t.contact.form.locationPlaceholder} />
+                    <input
+                      id="location"
+                      name="location"
+                      type="text"
+                      autoComplete="address-level2"
+                      placeholder={t.contact.form.locationPlaceholder}
+                    />
                   </div>
                   <div className="field full">
                     <label htmlFor="data">{t.contact.form.dateLabel}</label>
-                    <input id="data" type="text" placeholder={t.contact.form.datePlaceholder} />
+                    <input
+                      id="data"
+                      name="wedding-date"
+                      type="text"
+                      placeholder={t.contact.form.datePlaceholder}
+                    />
                   </div>
                   <div className="field full">
                     <label>{t.contact.form.budgetLabel}</label>

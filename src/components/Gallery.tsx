@@ -64,8 +64,14 @@ export default function Gallery() {
       <div className="wrap">
         <div className="masonry">
           {filtered.map((photo, i) => (
-            <div key={i} className="photo" onClick={() => setLightbox(i)}>
-              <div className="photo-num">
+            <button
+              key={i}
+              type="button"
+              className="photo"
+              onClick={() => setLightbox(i)}
+              aria-label={`${photo.title}, ${photo.loc}`}
+            >
+              <div className="photo-num" aria-hidden="true">
                 {(i + 1).toString().padStart(2, "0")}
               </div>
               <div className="photo-frame">
@@ -82,7 +88,7 @@ export default function Gallery() {
                 <span className="t">{photo.title}</span>
                 <span className="l">{photo.loc}</span>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>
