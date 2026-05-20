@@ -533,50 +533,39 @@ section { position: relative; }
 
 @media (max-width: 720px) { .filosofia { grid-template-columns: 1fr; gap: 36px; } }
 
-/* ── Stats strip — Impeccable: break the SaaS hero-metric grid.
-   1 anchor metric (big, lead), 3 secondaries inline as editorial run. */
+/* ── Stats strip — editorial almanac, 4 cells uniformi con divisori verticali. */
 .stats-strip {
-  display: grid;
-  grid-template-columns: minmax(220px, 1fr) 2.2fr;
-  gap: 48px;
-  align-items: end;
+  display: grid; grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 36px 0;
 }
-.stat-cell { padding: 0; border: 0; text-align: left; }
-.stats-strip > .stat-cell:first-child .stat-num { font-size: clamp(64px, 8vw, 96px); letter-spacing: -0.04em; }
-.stats-strip > .stat-cell:first-child .stat-label { font-size: 12px; margin-top: 12px; max-width: 22ch; }
-
-.stat-cell:not(:first-child) {
-  display: inline-flex; align-items: baseline; gap: 12px;
+.stat-cell {
+  padding: 36px 28px;
+  border-right: 1px solid var(--border);
+  text-align: left;
 }
-.stats-strip > .stat-cell:not(:first-child) {
-  grid-column: 2; grid-row: 1;
-  align-self: end;
-}
-.stats-secondary {
-  grid-column: 2; grid-row: 1;
-  display: flex; flex-wrap: wrap; gap: 32px 48px;
-  align-items: baseline;
-}
-.stats-secondary .stat-num { font-size: 28px; letter-spacing: -0.02em; }
-.stats-secondary .stat-label { font-size: 11px; margin-top: 4px; }
-
+.stat-cell:last-child { border-right: 0; }
 .stat-num {
   font-family: var(--font-sans); font-weight: 500;
-  color: var(--text); line-height: 1;
+  font-size: clamp(40px, 4.4vw, 56px);
+  line-height: 1; letter-spacing: -0.03em;
+  color: var(--text);
   font-feature-settings: 'tnum' 1;
 }
 .stat-label {
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0; text-transform: none;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0; text-transform: none;
   color: var(--text-3); display: block;
+  margin-top: 14px;
 }
 
 @media (max-width: 720px) {
-  .stats-strip { grid-template-columns: 1fr; gap: 28px; padding: 28px 0; }
-  .stats-secondary { gap: 20px 32px; }
-  .stat-cell:first-child .stat-num { font-size: 56px; }
+  .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .stat-cell { padding: 28px 20px; }
+  .stat-cell:nth-child(2) { border-right: 0; }
+  .stat-cell:nth-child(1), .stat-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 /* ── Filters ───────────────────────────────────── */
