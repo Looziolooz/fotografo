@@ -605,20 +605,94 @@ section { position: relative; }
 .photo {
   break-inside: avoid;
   margin-bottom: 16px;
-  border-radius: 8px;
   position: relative;
-  cursor: zoom-in;
-  background: transparent;
-  padding: 0;
-  box-shadow: none;
-  transition: transform .35s var(--ease);
+  width: 100%;
+  display: block;
+  perspective: 1400px;
+}
+.photo-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease);
+  border-radius: 8px;
+}
+.photo.is-flipped .photo-inner { transform: rotateY(180deg); }
+
+.photo-face {
+  display: block;
+  width: 100%;
+  text-align: left;
   border: 0;
   font: inherit;
   color: inherit;
-  text-align: left;
-  width: 100%;
-  display: block;
+  background: transparent;
+  padding: 0;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
+.photo-face-front {
+  cursor: zoom-in;
+  position: relative;
+  transition: transform .35s var(--ease);
+}
+.photo:not(.is-flipped) .photo-face-front:hover { transform: translateY(-2px); }
+
+.photo-face-back {
+  position: absolute; inset: 0;
+  transform: rotateY(180deg);
+  background:
+    linear-gradient(180deg, oklch(0.97 0.012 50) 0%, oklch(0.94 0.014 50) 100%);
+  border: 1px solid var(--border);
+  padding: 36px 28px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  /* match expected card height when flipped — uses container's intrinsic h */
+}
+.photo-back-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+.photo-back-note {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--text);
+  max-width: 26ch;
+  margin: 24px 0;
+}
+.photo-back-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Flip button: piccolo, in alto a destra, sopra entrambe le facce.
+   SVG icona ↺ (curved arrow), stessa palette accent. */
+.photo-flip-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  z-index: 4;
+  width: 28px; height: 28px;
+  border-radius: 999px;
+  background: oklch(0.985 0.005 50 / 0.92);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  display: grid; place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all .15s var(--ease);
+  opacity: 0;
+}
+.photo:hover .photo-flip-btn,
+.photo:focus-within .photo-flip-btn,
+.photo.is-flipped .photo-flip-btn { opacity: 1; }
+.photo-flip-btn:hover { color: var(--accent); border-color: var(--border-2); }
+.photo.is-flipped .photo-flip-btn { background: var(--bg); color: var(--accent); }
 .photo::before { content: none; }
 .photo:hover { transform: translateY(-2px); }
 .photo-frame {
