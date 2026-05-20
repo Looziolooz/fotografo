@@ -4,19 +4,44 @@ import Image from "next/image";
 import { useState, useCallback } from "react";
 import { useLang } from "@/context/LangContext";
 
-type Photo = { src: string; title: string; loc: string; tags: string[] };
+type Shot = {
+  roll: number;
+  frame: number;
+  shutter: string;
+  aperture: string;
+  film: string;
+  time: string;
+};
+type Photo = {
+  src: string;
+  title: string;
+  loc: string;
+  tags: string[];
+  shot: Shot;
+};
 
 const PHOTOS: Photo[] = [
-  { src: "/images/gallery/gallery-1.jpg", title: "Chiara & Marco", loc: "Montalcino, Toscana", tags: ["toscana", "pellicola"] },
-  { src: "/images/gallery/gallery-2.jpg", title: "Sofia & Alessandro", loc: "Positano, Costiera", tags: ["costiera"] },
-  { src: "/images/gallery/gallery-3.jpg", title: "Giulia & Andrea", loc: "Firenze", tags: ["toscana"] },
-  { src: "/images/gallery/gallery-4.jpg", title: "Emma & Luca", loc: "Siena, Toscana", tags: ["toscana", "pellicola"] },
-  { src: "/images/gallery/gallery-5.jpg", title: "Valentina & Matteo", loc: "Ravello", tags: ["costiera", "pellicola"] },
-  { src: "/images/gallery/gallery-6.jpg", title: "Alice & Giovanni", loc: "Lucca", tags: ["toscana"] },
-  { src: "/images/gallery/gallery-7.jpg", title: "Martina & Federico", loc: "San Gimignano", tags: ["toscana", "pellicola"] },
-  { src: "/images/gallery/gallery-8.jpg", title: "Francesca & Roberto", loc: "Capri", tags: ["costiera"] },
-  { src: "/images/gallery/gallery-9.jpg", title: "Elena & Davide", loc: "Val d'Orcia", tags: ["toscana", "pellicola"] },
+  { src: "/images/gallery/gallery-1.jpg", title: "Chiara & Marco",     loc: "Montalcino, Toscana", tags: ["toscana", "pellicola"],
+    shot: { roll: 24, frame: 12, shutter: "1/250", aperture: "f/2.8", film: "Portra 400", time: "17:42" } },
+  { src: "/images/gallery/gallery-2.jpg", title: "Sofia & Alessandro", loc: "Positano, Costiera", tags: ["costiera"],
+    shot: { roll: 11, frame: 4,  shutter: "1/500", aperture: "f/4",   film: "Digitale",   time: "18:15" } },
+  { src: "/images/gallery/gallery-3.jpg", title: "Giulia & Andrea",    loc: "Firenze", tags: ["toscana"],
+    shot: { roll: 7,  frame: 22, shutter: "1/125", aperture: "f/2",   film: "Digitale",   time: "20:30" } },
+  { src: "/images/gallery/gallery-4.jpg", title: "Emma & Luca",        loc: "Siena, Toscana", tags: ["toscana", "pellicola"],
+    shot: { roll: 19, frame: 8,  shutter: "1/250", aperture: "f/2.8", film: "Portra 400", time: "16:55" } },
+  { src: "/images/gallery/gallery-5.jpg", title: "Valentina & Matteo", loc: "Ravello", tags: ["costiera", "pellicola"],
+    shot: { roll: 31, frame: 15, shutter: "1/500", aperture: "f/4",   film: "Portra 800", time: "19:08" } },
+  { src: "/images/gallery/gallery-6.jpg", title: "Alice & Giovanni",   loc: "Lucca", tags: ["toscana"],
+    shot: { roll: 4,  frame: 30, shutter: "1/200", aperture: "f/2.8", film: "Digitale",   time: "15:20" } },
+  { src: "/images/gallery/gallery-7.jpg", title: "Martina & Federico", loc: "San Gimignano", tags: ["toscana", "pellicola"],
+    shot: { roll: 16, frame: 6,  shutter: "1/250", aperture: "f/2",   film: "Portra 400", time: "17:11" } },
+  { src: "/images/gallery/gallery-8.jpg", title: "Francesca & Roberto",loc: "Capri", tags: ["costiera"],
+    shot: { roll: 9,  frame: 18, shutter: "1/1000",aperture: "f/5.6", film: "Digitale",   time: "13:40" } },
+  { src: "/images/gallery/gallery-9.jpg", title: "Elena & Davide",     loc: "Val d'Orcia", tags: ["toscana", "pellicola"],
+    shot: { roll: 28, frame: 24, shutter: "1/125", aperture: "f/2.8", film: "Portra 400", time: "18:55" } },
 ];
+
+const pad = (n: number) => n.toString().padStart(2, "0");
 
 const FILTER_TAGS = ["", "toscana", "costiera", "pellicola"];
 
@@ -88,6 +113,9 @@ export default function Gallery() {
                 <span className="t">{photo.title}</span>
                 <span className="l">{photo.loc}</span>
               </div>
+              <div className="photo-frameno" aria-hidden="true">
+                R{pad(photo.shot.roll)} · F{pad(photo.shot.frame)}
+              </div>
             </button>
           ))}
         </div>
@@ -114,7 +142,15 @@ export default function Gallery() {
               <div className="eyebrow">{t.gallery.eyebrow}</div>
               <h3>{filtered[lightbox].title}</h3>
               <p>{filtered[lightbox].loc}</p>
-              <p>
+              <dl className="shot-data">
+                <div><dt>Roll</dt><dd>{pad(filtered[lightbox].shot.roll)}</dd></div>
+                <div><dt>Frame</dt><dd>{pad(filtered[lightbox].shot.frame)}</dd></div>
+                <div><dt>Time</dt><dd>{filtered[lightbox].shot.time}</dd></div>
+                <div><dt>Shutter</dt><dd>{filtered[lightbox].shot.shutter}</dd></div>
+                <div><dt>Aperture</dt><dd>{filtered[lightbox].shot.aperture}</dd></div>
+                <div><dt>Film</dt><dd>{filtered[lightbox].shot.film}</dd></div>
+              </dl>
+              <p className="lightbox-counter">
                 {lightbox + 1} {t.gallery.of} {filtered.length}
               </p>
             </div>

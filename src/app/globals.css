@@ -650,6 +650,17 @@ section { position: relative; }
 }
 
 .photo-corners { display: none; }
+
+/* Frame counter: piccolo segno mono che dice "questa è pellicola, conosco rullino e fotogramma".
+   Visibile sempre, non solo su hover. Pattern editoriale + identità da fotografo film. */
+.photo-frameno {
+  position: absolute; right: 4px; bottom: 10px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
 .photo-num {
   position: absolute; top: 10px; left: 10px; z-index: 2;
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0; text-transform: none;
@@ -689,6 +700,26 @@ section { position: relative; }
 .lightbox-meta p {
   color: oklch(0.985 0.005 50 / 0.68); margin-top: 12px; font-size: 14px;
   font-family: var(--font-sans);
+}
+
+/* Dati di scatto: griglia mono 2-col tipo EXIF terminal, sotto la location.
+   Conferma che dietro la foto c'è un fotografo che sa cosa ha fatto. */
+.shot-data {
+  margin: 22px 0 0;
+  display: grid; grid-template-columns: auto 1fr; gap: 4px 16px;
+  font-family: var(--font-mono); font-size: 11px;
+  border-top: 1px solid oklch(0.985 0.005 50 / 0.12);
+  padding-top: 18px;
+  max-width: 240px;
+}
+.shot-data > div { display: contents; }
+.shot-data dt { color: oklch(0.985 0.005 50 / 0.45); text-transform: uppercase; letter-spacing: 0.06em; }
+.shot-data dd { color: oklch(0.985 0.005 50 / 0.85); margin: 0; }
+.lightbox-counter {
+  margin-top: 22px !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  color: oklch(0.985 0.005 50 / 0.45) !important;
 }
 .lightbox-close {
   position: absolute; top: 18px; right: 20px;
