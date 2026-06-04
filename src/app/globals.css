@@ -259,8 +259,22 @@ p.ui { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
   transition: background .2s var(--ease), border-color .2s var(--ease);
 }
 .site-header.transparent {
-  background: rgba(255,255,255,0);
+  /* Soft scrim built into the header itself: garantisce contrasto del testo
+     bianco anche quando la foto sottostante ha aree chiare (cieli, abiti, muri). */
+  background: linear-gradient(180deg,
+    oklch(0.13 0.012 50 / 0.55) 0%,
+    oklch(0.13 0.012 50 / 0.28) 55%,
+    oklch(0.13 0.012 50 / 0.0) 100%);
+  backdrop-filter: none;
   border-bottom-color: transparent;
+}
+/* Text-shadow di backup: imperccettibile su sfondi scuri, salva la leggibilità
+   sui pochi pixel di foto chiara che possono affiorare attraverso lo scrim. */
+.site-header.transparent .nav a:not(.btn),
+.site-header.transparent .brand-name,
+.site-header.transparent .brand-sub,
+.site-header.transparent .lang-switch button {
+  text-shadow: 0 1px 2px oklch(0.13 0.012 50 / 0.35);
 }
 .site-header.transparent .nav a:not(.btn),
 .site-header.transparent .brand,
