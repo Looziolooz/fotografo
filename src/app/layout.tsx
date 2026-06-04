@@ -1,33 +1,31 @@
 import type { Metadata } from "next";
-import "@fontsource/dm-sans/400.css";
-import "@fontsource/dm-sans/500.css";
-import "@fontsource/dm-sans/600.css";
-import "@fontsource/fraunces/400-italic.css";
-import "@fontsource/fraunces/500-italic.css";
+import { neue, ogg } from "./fonts";
+import { SITE } from "@/content/site";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
-import { LangProvider } from "@/context/LangContext";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Atelier Solari — Fotografia di matrimoni · Tuscany & Amalfi Coast",
-  description:
-    "Fotografia di matrimoni vintage luxury in Italia. Pellicola, medio formato, ricordi che durano.",
+  title: SITE.title,
+  description: SITE.description,
+  openGraph: {
+    title: SITE.title,
+    description: SITE.description,
+    type: "website",
+    locale: "en_US",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="it" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">
-        <LangProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </LangProvider>
+    <html
+      lang="en"
+      className={`${neue.variable} ${ogg.variable} antialiased`}
+    >
+      <body className="min-h-screen bg-background text-foreground">
+        <SmoothScroll />
+        {children}
       </body>
     </html>
   );

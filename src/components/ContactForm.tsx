@@ -1,203 +1,46 @@
 "use client";
 
-import { useState } from "react";
-import { useLang } from "@/context/LangContext";
+import { useState, type FormEvent } from "react";
+import type { ContactField } from "@/content/i18n";
 
-const BUDGET_IT = ["€ 2.000–3.000", "€ 3.000–5.000", "€ 5.000+"];
-const BUDGET_EN = ["$ 2,200–3,300", "$ 3,300–5,500", "$ 5,500+"];
+/** Editorial underline-style inquiry form (front-end only — no backend in scope). */
+export function ContactForm({ fields, submit, success }: { fields: ContactField[]; submit: string; success: string }) {
+  const [sent, setSent] = useState(false);
 
-const VENUE_TYPES_IT = ["Villa", "Castello", "Masseria", "Spiaggia", "Borgo", "Non lo so"];
-const VENUE_TYPES_EN = ["Villa", "Castle", "Farmhouse", "Beach", "Medieval village", "Not sure yet"];
-
-const HORIZONS_IT = ["2026", "2027", "2028+", "Non ancora definito"];
-const HORIZONS_EN = ["2026", "2027", "2028+", "Not yet decided"];
-
-export default function ContactForm() {
-  const { t, lang } = useLang();
-  const [budget, setBudget] = useState("");
-  const [venue, setVenue] = useState("");
-  const [horizon, setHorizon] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  function onSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
-  };
+    setSent(true);
+  }
 
-  const budgetOptions = lang === "it" ? BUDGET_IT : BUDGET_EN;
-  const venueOptions = lang === "it" ? VENUE_TYPES_IT : VENUE_TYPES_EN;
-  const horizonOptions = lang === "it" ? HORIZONS_IT : HORIZONS_EN;
+  if (sent) {
+    return <p className="font-display text-[clamp(1.5rem,3vw,2.25rem)] leading-snug">{success}</p>;
+  }
 
   return (
-    <section id="contatti" className="section">
-      <div className="wrap">
-        <div className="section-head">
-          <div className="eyebrow">{t.contact.eyebrow}</div>
-          <h2>
-            {t.contact.title[0]}<em>{t.contact.title[1]}</em>{t.contact.title[2]}
-          </h2>
-          <p>{t.contact.desc}</p>
-        </div>
-        <div className="contact-grid">
-          <div className="contact-info">
-            <p>{t.contact.infoText}</p>
-            <ul className="contact-points">
-              {t.contact.points.map((p, i) => (
-                <li key={i}>
-                  <div className="ic">
-                    {i === 0 ? (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                    ) : i === 1 ? (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <rect x="2" y="4" width="20" height="16" rx="2" />
-                        <path d="M22 4l-10 8L2 4" />
-                      </svg>
-                    ) : (
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                      </svg>
-                    )}
-                  </div>
-                  <div>
-                    <div className="k">{p.k}</div>
-                    <div className="v">{p.v}</div>
-                  </div>
-                </li>
+    <form onSubmit={onSubmit} className="flex flex-col">
+      {fields.map((f) => (
+        <label key={f.label} className="grid grid-cols-1 gap-2 border-b border-black/15 py-6 sm:grid-cols-[1fr_1.4fr] sm:items-baseline sm:gap-6">
+          <span className="font-sans text-[12px] uppercase tracking-[0.14em] text-black/80">
+            {f.label}{f.required && <span className="text-black/35"> *</span>}:
+          </span>
+          {f.type === "textarea" ? (
+            <textarea rows={3} required={f.required} placeholder={f.placeholder} className="resize-none bg-transparent font-sans text-[15px] text-black outline-none placeholder:text-black/30" />
+          ) : f.type === "select" ? (
+            <select required={f.required} defaultValue="" className="bg-transparent font-sans text-[15px] text-black outline-none [&:invalid]:text-black/30">
+              <option value="" disabled>{f.placeholder}</option>
+              {(f.options ?? []).map((o) => (
+                <option key={o} value={o} className="text-black">{o}</option>
               ))}
-            </ul>
-          </div>
-
-          {submitted ? (
-            <div className="form-card">
-              <div className="form-success">
-                <div className="check">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <h3>{t.contact.success.title}</h3>
-                <p>{t.contact.success.desc}</p>
-              </div>
-            </div>
+            </select>
           ) : (
-            <div className="form-card">
-              <form onSubmit={handleSubmit}>
-                <div className="form-grid">
-                  <div className="field">
-                    <label htmlFor="nome">{t.contact.form.nameLabel}</label>
-                    <input
-                      id="nome"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      placeholder={t.contact.form.namePlaceholder}
-                      required
-                    />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="email">{t.contact.form.emailLabel}</label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      inputMode="email"
-                      placeholder={t.contact.form.emailPlaceholder}
-                      required
-                    />
-                  </div>
-
-                  {/* Bostadstyp — Venue Type */}
-                  <div className="field full">
-                    <label>{t.contact.form.venueLabel}</label>
-                    <div className="budget-options">
-                      {venueOptions.map((v) => (
-                        <button
-                          key={v}
-                          type="button"
-                          className={`opt ${venue === v ? "on" : ""}`}
-                          onClick={() => setVenue(v)}
-                        >
-                          {v}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Tidshorisont — Planning Timeline */}
-                  <div className="field full">
-                    <label>{t.contact.form.horizonLabel}</label>
-                    <div className="budget-options">
-                      {horizonOptions.map((h) => (
-                        <button
-                          key={h}
-                          type="button"
-                          className={`opt ${horizon === h ? "on" : ""}`}
-                          onClick={() => setHorizon(h)}
-                        >
-                          {h}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="field full">
-                    <label htmlFor="location">{t.contact.form.locationLabel}</label>
-                    <input
-                      id="location"
-                      name="location"
-                      type="text"
-                      autoComplete="address-level2"
-                      placeholder={t.contact.form.locationPlaceholder}
-                    />
-                  </div>
-                  <div className="field full">
-                    <label htmlFor="data">{t.contact.form.dateLabel}</label>
-                    <input
-                      id="data"
-                      name="wedding-date"
-                      type="text"
-                      placeholder={t.contact.form.datePlaceholder}
-                    />
-                  </div>
-                  <div className="field full">
-                    <label>{t.contact.form.budgetLabel}</label>
-                    <div className="budget-options">
-                      {budgetOptions.map((b) => (
-                        <button
-                          key={b}
-                          type="button"
-                          className={`opt ${budget === b ? "on" : ""}`}
-                          onClick={() => setBudget(b)}
-                        >
-                          {b}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="field full">
-                    <label htmlFor="message">{t.contact.form.messageLabel}</label>
-                    <textarea
-                      id="message"
-                      placeholder={t.contact.form.messagePlaceholder}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="form-submit-row">
-                  <span className="privacy-note">{t.contact.form.privacy}</span>
-                  <button type="submit" className="btn btn-primary">
-                    {t.contact.form.submit}
-                  </button>
-                </div>
-              </form>
-            </div>
+            <input type={f.type} required={f.required} placeholder={f.placeholder} className="bg-transparent font-sans text-[15px] text-black outline-none placeholder:text-black/30" />
           )}
-        </div>
-      </div>
-    </section>
+        </label>
+      ))}
+
+      <button type="submit" className="font-display mt-12 w-fit text-[clamp(1.75rem,3.5vw,2.75rem)] leading-none transition-opacity hover:opacity-50">
+        {submit}
+      </button>
+    </form>
   );
 }

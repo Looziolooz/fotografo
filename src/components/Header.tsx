@@ -3,126 +3,107 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useLang } from "@/context/LangContext";
+import { SITE } from "@/content/site";
+import { getDict, type Locale } from "@/content/i18n";
+import { Wordmark } from "@/components/Wordmark";
+import { cn } from "@/lib/utils";
 
-export default function Header() {
-  const { t, lang, setLang } = useLang();
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-  const [scrolled, setScrolled] = useState(false);
+/**
+ * Fixed minimal top bar — MENU (full-screen overlay) · centered Solari
+ * wordmark · language switch + Instagram. `mix-blend-difference` keeps it
+ * legible over both the white gutters and the photographs.
+ */
+export function Header({ lang }: { lang: Locale }) {
   const [open, setOpen] = useState(false);
+  const dict = getDict(lang);
+  const pathname = usePathname();
+  const other: Locale = lang === "en" ? "it" : "en";
+  const switchHref = `/${other}${pathname.replace(/^\/(en|it)(?=\/|$)/, "")}`;
+  const href = (path: string) => `/${lang}${path}`;
+  // White text over photo backgrounds (home + portfolio), dark over the
+  // white-background content pages.
+  const isPhotoBg = pathname === `/${lang}` || pathname.includes("/portfolio/");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
+    document.documentElement.classList.toggle("lenis-stopped", open);
+    return () => document.documentElement.classList.remove("lenis-stopped");
   }, [open]);
 
-  const close = () => setOpen(false);
-  const isActive = (href: string) =>
-    pathname === href || (href !== "/" && pathname.startsWith(href));
-
-  /* Header transparent solo su rotte con hero scuro full-bleed:
-     /portfolio (FeaturedWorks cinematic) e /portfolio/[slug] (wedding hero). */
-  const wantsTransparent = pathname.startsWith("/portfolio");
-  const transparentClass = !isHome && wantsTransparent && !scrolled ? "transparent" : "";
-
   return (
-    <header className={`site-header ${transparentClass}`}>
-      <div className="header-inner">
-        <Link href="/" className="brand">
-          <span className="brand-mark">S</span>
-          <span>
-            <span className="brand-name">Atelier Solari</span>
-            <span className="brand-sub">{t.header.brandSub}</span>
-          </span>
-        </Link>
-        <nav className="nav">
-          {t.header.nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={isActive(item.href) ? "active" : ""}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <div className="lang-switch">
-            <button onClick={() => setLang("it")} className={lang === "it" ? "active" : ""}>IT</button>
-            <span>/</span>
-            <button onClick={() => setLang("en")} className={lang === "en" ? "active" : ""}>EN</button>
-          </div>
-          <Link href="/contatti" className="btn btn-primary">
-            {t.header.cta}
-          </Link>
-        </nav>
-        <button
-          className={`hamburger ${open ? "open" : ""}`}
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
+    <>
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        {isPhotoBg && (
+          <div
+            aria-hidden
+            className="absolute inset-x-0 top-0 h-[185%] bg-gradient-to-b from-black/60 via-black/30 to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_bottom,black_55%,transparent)]"
+          />
+        )}
+        <div
+          className={cn(
+            "pointer-events-auto relative flex items-center justify-between px-[clamp(1rem,3vw,2.75rem)] py-[clamp(1rem,1.8vw,1.6rem)]",
+            isPhotoBg ? "text-white" : "text-black",
+          )}
         >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-      {open && <div className="mobile-overlay" onClick={close} />}
-      <div className={`mobile-menu ${open ? "open" : ""}`}>
-        <div className="mobile-menu-inner">
-          {t.header.nav.map((item, i) => (
+          <button onClick={() => setOpen(true)} className="font-sans text-[11px] uppercase tracking-[0.28em] transition-opacity hover:opacity-60">
+            {dict.common.menu}
+          </button>
+
+          <Link href={href("")} aria-label={SITE.name}>
+            <Wordmark />
+          </Link>
+
+          <div className="flex items-center gap-[clamp(0.75rem,1.6vw,1.5rem)]">
+            <Link href={switchHref} className="font-sans text-[11px] uppercase tracking-[0.2em] transition-opacity hover:opacity-60" aria-label={`Switch to ${other.toUpperCase()}`}>
+              {other.toUpperCase()}
+            </Link>
+            <a href={SITE.instagram} target="_blank" rel="noreferrer" className="hidden font-sans text-[11px] uppercase tracking-[0.2em] transition-opacity hover:opacity-60 sm:block">
+              {SITE.instagramHandle}
+            </a>
+          </div>
+        </div>
+      </header>
+
+      {/* Full-screen overlay menu */}
+      <div
+        className={cn(
+          "fixed inset-0 z-[60] flex flex-col overflow-y-auto bg-white text-black transition-[clip-path,opacity] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]",
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+        )}
+        style={{ clipPath: open ? "inset(0 0 0% 0)" : "inset(0 0 100% 0)" }}
+      >
+        <div className="flex items-center justify-between px-[clamp(1rem,3vw,2.75rem)] py-[clamp(1rem,1.8vw,1.6rem)]">
+          <Wordmark />
+          <button onClick={() => setOpen(false)} className="font-sans text-[11px] uppercase tracking-[0.28em] transition-opacity hover:opacity-60">
+            {dict.common.close}
+          </button>
+        </div>
+
+        <nav className="flex flex-1 flex-col justify-center gap-2 px-[clamp(1.25rem,6vw,6rem)]">
+          {dict.nav.map((item, i) => (
             <Link
-              key={item.href}
-              href={item.href}
-              className={`mobile-link ${isActive(item.href) ? "active" : ""}`}
-              onClick={close}
+              key={`${item.label}-${i}`}
+              href={href(item.path)}
+              onClick={() => setOpen(false)}
+              className="font-display w-fit text-[clamp(2.5rem,8vw,6rem)] leading-[1.05] transition-opacity hover:opacity-50"
             >
-              <span className="mobile-num">
-                {String(i + 1).padStart(2, "0")}
-              </span>
               {item.label}
             </Link>
           ))}
-          <div className="mobile-lang" style={{ display: "flex", gap: 8, marginTop: 24 }}>
-            <button
-              onClick={() => setLang("it")}
-              className={`pill ${lang === "it" ? "active" : ""}`}
-              style={{ flex: 1, textAlign: "center" }}
-            >
-              IT
-            </button>
-            <button
-              onClick={() => setLang("en")}
-              className={`pill ${lang === "en" ? "active" : ""}`}
-              style={{ flex: 1, textAlign: "center" }}
-            >
-              EN
-            </button>
+        </nav>
+
+        <div className="flex flex-wrap items-end justify-between gap-6 px-[clamp(1.25rem,6vw,6rem)] py-[clamp(1.5rem,3vw,3rem)] font-sans text-[12px] uppercase tracking-[0.16em] text-black/70">
+          <div className="flex flex-col gap-1">
+            <a href={`mailto:${SITE.email}`} className="hover:text-black">{SITE.email}</a>
+            {SITE.phones.map((ph) => (
+              <a key={ph} href={`tel:${ph.replace(/\s/g, "")}`} className="hover:text-black">{ph}</a>
+            ))}
           </div>
-          <Link
-            href="/contatti"
-            className="btn btn-primary"
-            style={{ marginTop: 16, width: "100%", justifyContent: "center" }}
-            onClick={close}
-          >
-            {t.header.cta}
-          </Link>
-          <div className="mobile-foot">
-            <span>{t.header.mobileFoot}</span>
+          <div className="flex items-center gap-4">
+            <Link href={switchHref} onClick={() => setOpen(false)} className="hover:text-black">{other.toUpperCase()}</Link>
+            <a href={SITE.instagram} target="_blank" rel="noreferrer" className="hover:text-black">{SITE.instagramHandle}</a>
           </div>
         </div>
       </div>
-    </header>
+    </>
   );
 }
