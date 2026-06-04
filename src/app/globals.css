@@ -1189,57 +1189,6 @@ footer.site-footer {
   font-family: var(--font-mono); font-size: 11px; color: var(--text-3);
 }
 
-/* Colofone — al posto di un footer-bottom generico, una sezione tipografica
-   che dichiara di cosa è fatto il sito. Pattern editoriale italiano (Il Manifesto,
-   La Repubblica). Niente peer photographer site lo fa. */
-.colophon {
-  margin-top: 56px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: 140px 1fr 220px;
-  gap: 24px 48px;
-  align-items: start;
-}
-.colophon-head {
-  font-family: var(--font-serif-italic);
-  font-style: italic;
-  font-size: 18px;
-  color: var(--text);
-  font-weight: 400;
-}
-.colophon-body {
-  display: flex; flex-direction: column; gap: 4px;
-  max-width: 56ch;
-}
-.colophon-body p {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  line-height: 1.55;
-  color: var(--text-2);
-  max-width: none;
-  margin: 0;
-}
-.colophon-meta {
-  display: flex; flex-direction: column; gap: 4px;
-  font-family: var(--font-mono); font-size: 11px;
-  color: var(--text-3);
-  text-align: right;
-}
-.colophon-meta span:last-child {
-  font-family: var(--font-serif-italic); font-style: italic;
-  font-size: 13px;
-  color: var(--accent);
-  margin-top: 6px;
-}
-
-@media (max-width: 720px) {
-  .colophon {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .colophon-meta { text-align: left; }
-}
 
 /* ── Storia — long-form editorial: un matrimonio raccontato in profondità.
    Layout asimmetrico alternato, no card grids, ritmo da magazine. Differenziatore
