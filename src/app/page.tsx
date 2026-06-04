@@ -6,8 +6,8 @@ import { useLang } from "@/context/LangContext";
 export default function Home() {
   const { lang } = useLang();
   const intro = lang === "it"
-    ? "Fotografia di matrimoni · Toscana · Costiera Amalfitana"
-    : "Wedding photography · Tuscany · Amalfi Coast";
+    ? "Matrimoni in location italiane spettacolari · Coppie italiane e internazionali"
+    : "Weddings in spectacular Italian locations · Italian and international couples";
   const cta = lang === "it" ? "Entra nel portfolio" : "Enter the portfolio";
 
   return (
