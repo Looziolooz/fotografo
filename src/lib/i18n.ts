@@ -101,11 +101,11 @@ export type I18nDict = {
 const IT: I18nDict = {
   header: {
     nav: [
-      { label: "Filosofia", href: "#filosofia" },
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Servizi", href: "#servizi" },
-      { label: "Diario", href: "#diario" },
-      { label: "Contatti", href: "#contatti" },
+      { label: "Portfolio", href: "/portfolio" },
+      { label: "Storia", href: "/storia" },
+      { label: "Servizi", href: "/servizi" },
+      { label: "Diario", href: "/diario" },
+      { label: "Contatti", href: "/contatti" },
     ],
     cta: "Richiedi preventivo",
     brandSub: "Fotografia di Matrimoni",
@@ -285,19 +285,18 @@ const IT: I18nDict = {
     col1: {
       title: "Servizi",
       items: [
-        { label: "Piani", href: "#servizi" },
-        { label: "Portfolio", href: "#portfolio" },
-        { label: "Album fine-art", href: "#" },
-        { label: "Boudoir", href: "#" },
+        { label: "Piani", href: "/servizi" },
+        { label: "Portfolio", href: "/portfolio" },
+        { label: "Album fine-art", href: "/servizi" },
+        { label: "Boudoir", href: "/servizi" },
       ],
     },
     col2: {
       title: "Esplora",
       items: [
-        { label: "Filosofia", href: "#filosofia" },
-        { label: "Diario", href: "#diario" },
-        { label: "FAQ", href: "#" },
-        { label: "Contatti", href: "#contatti" },
+        { label: "Storia", href: "/storia" },
+        { label: "Diario", href: "/diario" },
+        { label: "Contatti", href: "/contatti" },
       ],
     },
     col3: {
@@ -316,11 +315,11 @@ const IT: I18nDict = {
 const EN: I18nDict = {
   header: {
     nav: [
-      { label: "About", href: "#filosofia" },
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Services", href: "#servizi" },
-      { label: "Journal", href: "#diario" },
-      { label: "Contact", href: "#contatti" },
+      { label: "Portfolio", href: "/portfolio" },
+      { label: "Story", href: "/storia" },
+      { label: "Services", href: "/servizi" },
+      { label: "Journal", href: "/diario" },
+      { label: "Contact", href: "/contatti" },
     ],
     cta: "Get a quote",
     brandSub: "Wedding Photography",
@@ -500,19 +499,18 @@ const EN: I18nDict = {
     col1: {
       title: "Services",
       items: [
-        { label: "Plans", href: "#servizi" },
-        { label: "Portfolio", href: "#portfolio" },
-        { label: "Fine-art album", href: "#" },
-        { label: "Boudoir", href: "#" },
+        { label: "Plans", href: "/servizi" },
+        { label: "Portfolio", href: "/portfolio" },
+        { label: "Fine-art album", href: "/servizi" },
+        { label: "Boudoir", href: "/servizi" },
       ],
     },
     col2: {
       title: "Explore",
       items: [
-        { label: "About", href: "#filosofia" },
-        { label: "Journal", href: "#diario" },
-        { label: "FAQ", href: "#" },
-        { label: "Contact", href: "#contatti" },
+        { label: "Story", href: "/storia" },
+        { label: "Journal", href: "/diario" },
+        { label: "Contact", href: "/contatti" },
       ],
     },
     col3: {

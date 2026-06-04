@@ -1,36 +1,27 @@
-import { LangProvider } from "@/context/LangContext";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Filosofia from "@/components/Filosofia";
-import StatsStrip from "@/components/StatsStrip";
-import FeaturedWorks from "@/components/FeaturedWorks";
-import Gallery from "@/components/Gallery";
-import Servizi from "@/components/Servizi";
-import Testimonianze from "@/components/Testimonianze";
-import Diario from "@/components/Diario";
-import Storia from "@/components/Storia";
-import ContactForm from "@/components/ContactForm";
-import ClosingQuote from "@/components/ClosingQuote";
-import Footer from "@/components/Footer";
+"use client";
+
+import Link from "next/link";
+import { useLang } from "@/context/LangContext";
 
 export default function Home() {
+  const { lang } = useLang();
+  const intro = lang === "it"
+    ? "Fotografia di matrimoni · Toscana · Costiera Amalfitana"
+    : "Wedding photography · Tuscany · Amalfi Coast";
+  const cta = lang === "it" ? "Entra nel portfolio" : "Enter the portfolio";
+
   return (
-    <LangProvider>
-      <Header />
-      <main>
-        <Hero />
-        <Filosofia />
-        <StatsStrip />
-        <FeaturedWorks />
-        <Gallery />
-        <Servizi />
-        <Testimonianze />
-        <Storia />
-        <Diario />
-        <ContactForm />
-        <ClosingQuote />
-      </main>
-      <Footer />
-    </LangProvider>
+    <section className="home-splash">
+      <div className="wrap-narrow home-splash-inner">
+        <div className="eyebrow">{intro}</div>
+        <h1 className="home-title">
+          Atelier <em>Solari</em>
+        </h1>
+        <Link href="/portfolio" className="home-cta">
+          {cta}
+          <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+    </section>
   );
 }

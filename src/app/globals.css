@@ -585,6 +585,58 @@ section { position: relative; }
   }
 }
 
+/* ── Home splash: minimale, niente hero immagine, brand + entry point.
+   Centro tutto verticalmente in viewport, tipografia editoriale Fraunces italic. */
+.home-splash {
+  min-height: calc(100vh - 80px);
+  display: grid; place-items: center;
+  padding: 120px 0 80px;
+  position: relative;
+}
+.home-splash-inner {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 32px;
+}
+.home-splash .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.home-title {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 11vw, 156px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  color: var(--text);
+  margin: 0;
+}
+.home-title em {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.home-cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: 16px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+  padding: 14px 26px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  transition: all .2s var(--ease);
+}
+.home-cta:hover {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+  gap: 18px;
+}
+
 /* ── Featured works (Avagyan-style cinematic scroll).
    Ogni matrimonio occupa un viewport intero. Titolo serif uppercase centrato,
    location mono sotto, counter top-left, anno top-right. Scrim sottile per

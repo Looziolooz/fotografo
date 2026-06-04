@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLang } from "@/context/LangContext";
 
 export default function Header() {
   const { t, lang, setLang } = useLang();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -15,21 +18,6 @@ export default function Header() {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    const sections = t.header.nav.map((item) => item.href.slice(1));
-    const onScroll = () => {
-      const scrollY = window.scrollY + 120;
-      let current = "";
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
-      }
-      setActive(current);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [t]);
 
   useEffect(() => {
     if (!open) return;
@@ -43,35 +31,43 @@ export default function Header() {
   }, [open]);
 
   const close = () => setOpen(false);
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/" && pathname.startsWith(href));
+
+  /* The header is "transparent" only on routes that own their own dark hero
+     (currently /portfolio FeaturedWorks). Elsewhere we always show the solid
+     header so the brand stays readable on light pages. */
+  const wantsTransparent = isHome === false && pathname.startsWith("/portfolio");
+  const transparentClass = wantsTransparent && !scrolled ? "transparent" : "";
 
   return (
-    <header className={`site-header ${!scrolled ? "transparent" : ""}`}>
+    <header className={`site-header ${transparentClass}`}>
       <div className="header-inner">
-        <a href="#" className="brand">
+        <Link href="/" className="brand">
           <span className="brand-mark">S</span>
           <span>
             <span className="brand-name">Atelier Solari</span>
             <span className="brand-sub">{t.header.brandSub}</span>
           </span>
-        </a>
+        </Link>
         <nav className="nav">
           {t.header.nav.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
-              className={active === item.href.slice(1) ? "active" : ""}
+              className={isActive(item.href) ? "active" : ""}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <div className="lang-switch">
             <button onClick={() => setLang("it")} className={lang === "it" ? "active" : ""}>IT</button>
             <span>/</span>
             <button onClick={() => setLang("en")} className={lang === "en" ? "active" : ""}>EN</button>
           </div>
-          <a href="#contatti" className="btn btn-primary">
+          <Link href="/contatti" className="btn btn-primary">
             {t.header.cta}
-          </a>
+          </Link>
         </nav>
         <button
           className={`hamburger ${open ? "open" : ""}`}
@@ -86,18 +82,18 @@ export default function Header() {
       {open && <div className="mobile-overlay" onClick={close} />}
       <div className={`mobile-menu ${open ? "open" : ""}`}>
         <div className="mobile-menu-inner">
-          {t.header.nav.map((item) => (
-            <a
+          {t.header.nav.map((item, i) => (
+            <Link
               key={item.href}
               href={item.href}
-              className={`mobile-link ${active === item.href.slice(1) ? "active" : ""}`}
+              className={`mobile-link ${isActive(item.href) ? "active" : ""}`}
               onClick={close}
             >
               <span className="mobile-num">
-                {String(t.header.nav.indexOf(item) + 1).padStart(2, "0")}
+                {String(i + 1).padStart(2, "0")}
               </span>
               {item.label}
-            </a>
+            </Link>
           ))}
           <div className="mobile-lang" style={{ display: "flex", gap: 8, marginTop: 24 }}>
             <button
@@ -115,14 +111,14 @@ export default function Header() {
               EN
             </button>
           </div>
-          <a
-            href="#contatti"
+          <Link
+            href="/contatti"
             className="btn btn-primary"
             style={{ marginTop: 16, width: "100%", justifyContent: "center" }}
             onClick={close}
           >
             {t.header.cta}
-          </a>
+          </Link>
           <div className="mobile-foot">
             <span>{t.header.mobileFoot}</span>
           </div>

@@ -28,7 +28,7 @@ const STORIA_IT = {
     "L’album è arrivato a fine novembre. Chiara mi ha rimandato un messaggio, stavolta senza foto: “È come ricordare un sogno fatto bene.” Non potrei dirlo meglio.",
 
   ctaLabel: "Vedi tutto il portfolio",
-  ctaHref: "#portfolio",
+  ctaHref: "/portfolio",
 };
 
 const STORIA_EN = {
@@ -56,7 +56,7 @@ const STORIA_EN = {
     "The album arrived in late November. Chiara wrote me back, this time without a photo: “It’s like remembering a dream you remembered well.” I couldn’t say it better.",
 
   ctaLabel: "See the full portfolio",
-  ctaHref: "#portfolio",
+  ctaHref: "/portfolio",
 };
 
 const IMAGES = {
