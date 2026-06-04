@@ -5,19 +5,19 @@ import { useLang } from "@/context/LangContext";
 
 const STORIA_IT = {
   eyebrow: "Storia · 01",
-  title: ["Chiara & Marco, ", "Montalcino"] as [string, string],
+  title: ["Sophie & Marco, ", "Montalcino"] as [string, string],
   meta: "14 settembre 2025 · Castello di Vicarello",
 
   introCh: "Q",
   intro:
-    "uando Chiara mi ha scritto a febbraio, mi ha mandato una sola fotografia: la finestra della sua cucina con la pioggia. “Voglio una giornata che assomigli a questa luce,” diceva il messaggio. Sette mesi dopo, eravamo in cima a una collina vicino a Montalcino, e il sole stava facendo esattamente quello che lei aveva chiesto.",
+    "uando Sophie mi ha scritto a febbraio da Londra, mi ha mandato una sola fotografia: la finestra della sua cucina con la pioggia. “Voglio una giornata che assomigli a questa luce,” diceva il messaggio. Sette mesi dopo, eravamo in cima a una collina vicino a Montalcino, e il sole stava facendo esattamente quello che lei aveva chiesto.",
 
   chapter1Eyebrow: "I · La cerimonia",
   chapter1:
     "Hanno fatto la promessa sotto un olmo che doveva avere più di duecento anni. Il vento muoveva le foglie, e ogni tanto una luce verde gli passava sopra. La pellicola medio formato è esigente con il vento: devi aspettare. Ho aspettato due fotogrammi prima di scattare.",
 
   quote: "Non voglio una posa. Voglio che vi dimentichiate che sono qui.",
-  quoteWho: "Chiara, durante il primo caffè a Firenze",
+  quoteWho: "Sophie, durante il primo caffè a Firenze",
 
   chapter2Eyebrow: "II · I ritratti, tra le vigne",
   chapter2:
@@ -25,7 +25,7 @@ const STORIA_IT = {
 
   closingEyebrow: "Coda",
   closing:
-    "L’album è arrivato a fine novembre. Chiara mi ha rimandato un messaggio, stavolta senza foto: “È come ricordare un sogno fatto bene.” Non potrei dirlo meglio.",
+    "L’album è arrivato a fine novembre. Sophie mi ha rimandato un messaggio, stavolta senza foto: “È come ricordare un sogno fatto bene.” Non potrei dirlo meglio.",
 
   ctaLabel: "Vedi tutto il portfolio",
   ctaHref: "/portfolio",
@@ -33,19 +33,19 @@ const STORIA_IT = {
 
 const STORIA_EN = {
   eyebrow: "Story · 01",
-  title: ["Chiara & Marco, ", "Montalcino"] as [string, string],
+  title: ["Sophie & Marco, ", "Montalcino"] as [string, string],
   meta: "September 14, 2025 · Castello di Vicarello",
 
   introCh: "W",
   intro:
-    "hen Chiara wrote to me in February, she sent only one picture: the window of her kitchen, in the rain. “I want a day that looks like this light,” the message said. Seven months later, we were on a hilltop near Montalcino, and the sun was doing exactly what she had asked.",
+    "hen Sophie wrote to me from London in February, she sent only one picture: the window of her kitchen, in the rain. “I want a day that looks like this light,” the message said. Seven months later, we were on a hilltop near Montalcino, and the sun was doing exactly what she had asked.",
 
   chapter1Eyebrow: "I · The ceremony",
   chapter1:
     "They made their promise under an elm that had to be more than two hundred years old. The wind moved the leaves, and now and then a green light passed over them. Medium format film is demanding with wind: you wait. I waited two frames before pressing the shutter.",
 
   quote: "I don’t want a pose. I want you to forget I’m here.",
-  quoteWho: "Chiara, over our first coffee in Florence",
+  quoteWho: "Sophie, over our first coffee in Florence",
 
   chapter2Eyebrow: "II · Portraits, among the vines",
   chapter2:
@@ -53,17 +53,17 @@ const STORIA_EN = {
 
   closingEyebrow: "Coda",
   closing:
-    "The album arrived in late November. Chiara wrote me back, this time without a photo: “It’s like remembering a dream you remembered well.” I couldn’t say it better.",
+    "The album arrived in late November. Sophie wrote me back, this time without a photo: “It’s like remembering a dream you remembered well.” I couldn’t say it better.",
 
   ctaLabel: "See the full portfolio",
   ctaHref: "/portfolio",
 };
 
 const IMAGES = {
-  intro: "/images/gallery/gallery-1.jpg",
-  chapter1: "/images/gallery/gallery-4.jpg",
-  chapter2: "/images/gallery/gallery-7.jpg",
-  closing: "/images/gallery/gallery-9.jpg",
+  intro: "/images/works/sophie-marco/cover.png",
+  chapter1: "/images/works/sophie-marco/01.png",
+  chapter2: "/images/works/sophie-marco/02.png",
+  closing: "/images/works/sophie-marco/03.png",
 };
 
 export default function Storia() {
@@ -86,7 +86,7 @@ export default function Storia() {
         <div className="storia-image storia-image-1">
           <Image
             src={IMAGES.intro}
-            alt="Chiara & Marco, Montalcino"
+            alt="Sophie & Marco, Montalcino"
             width={720}
             height={960}
             sizes="(max-width: 880px) 100vw, 50vw"

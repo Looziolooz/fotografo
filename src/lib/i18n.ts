@@ -202,18 +202,18 @@ const IT: I18nDict = {
     items: [
       {
         quote: "Lorenzo non è solo un fotografo: è un narratore. Rivedere le foto del nostro matrimonio ci ha fatto piangere e ridere come se fosse di nuovo quel giorno.",
-        name: "Chiara & Marco",
+        name: "Sophie & Marco",
         location: "Montalcino, Toscana",
       },
       {
         quote: "La scelta della pellicola ha reso ogni scatto un'opera d'arte. Non ci siamo mai sentiti così a nostro agio davanti a un obiettivo.",
-        name: "Sofia & Alessandro",
+        name: "Astrid & Alessandro",
         location: "Positano, Costiera Amalfitana",
       },
       {
         quote: "Avevamo paura di risultare rigidi, ma Lorenzo ci ha guidati con una naturalezza incredibile. Il risultato? Emozioni pure, senza filtri.",
-        name: "Giulia & Andrea",
-        location: "Firenze",
+        name: "Helena & Davide",
+        location: "Val d'Orcia, Toscana",
       },
     ],
   },
@@ -416,18 +416,18 @@ const EN: I18nDict = {
     items: [
       {
         quote: "Lorenzo is not just a photographer: he's a storyteller. Looking at our wedding photos made us cry and laugh as if it were that day all over again.",
-        name: "Chiara & Marco",
+        name: "Sophie & Marco",
         location: "Montalcino, Tuscany",
       },
       {
         quote: "Choosing film made every shot a work of art. We've never felt so at ease in front of a lens.",
-        name: "Sofia & Alessandro",
+        name: "Astrid & Alessandro",
         location: "Positano, Amalfi Coast",
       },
       {
         quote: "We were afraid of looking stiff, but Lorenzo guided us with incredible naturalness. The result? Pure emotions, no filters.",
-        name: "Giulia & Andrea",
-        location: "Florence",
+        name: "Helena & Davide",
+        location: "Val d'Orcia, Tuscany",
       },
     ],
   },

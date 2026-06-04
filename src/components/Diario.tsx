@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useLang } from "@/context/LangContext";
 
 const DIARIO_IMAGES = [
-  "/images/blog-1.jpg",
-  "/images/blog-2.jpg",
-  "/images/blog-3.jpg",
-  "/images/blog-4.jpg",
+  "/images/works/sophie-marco/cover.png",
+  "/images/works/helena-davide/cover.png",
+  "/images/works/astrid-alessandro/cover.png",
+  "/images/works/anastasia-federico/cover.png",
 ];
 const DIARIO_DURATIONS = [null, "4 min", "6 min", null];
 
