@@ -2,6 +2,8 @@
 
 A bilingual (EN/IT) wedding photography portfolio built with **Next.js 16**, **React 19**, **TypeScript**, and **Tailwind CSS v4**.
 
+**[Live Demo →](https://fotografo-five.vercel.app/en)**
+
 ---
 
 ## EN – English
