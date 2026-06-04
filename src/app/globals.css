@@ -637,6 +637,182 @@ section { position: relative; }
   gap: 18px;
 }
 
+/* ── Wedding detail (/portfolio/[slug]) — pattern editoriale avagyan-style.
+   Hero full-bleed con couple name centrato, descrizione narrow, gallery
+   verticale a immagini grandi, next project con preview link. */
+.wedding-detail { background: var(--bg); }
+
+.wedding-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  width: 100%;
+  overflow: hidden;
+  color: var(--on-dark);
+}
+.wedding-hero-image { position: absolute; inset: 0; background: var(--surface-dark); }
+.wedding-hero-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.85) contrast(1.02);
+}
+.wedding-hero-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    oklch(0.13 0.012 50 / 0.45) 0%,
+    oklch(0.13 0.012 50 / 0.05) 30%,
+    oklch(0.13 0.012 50 / 0.05) 60%,
+    oklch(0.13 0.012 50 / 0.55) 100%);
+}
+.wedding-hero-meta-top {
+  position: absolute;
+  top: 100px; left: 0; right: 0;
+  padding: 0 40px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 11px;
+  color: oklch(0.985 0.005 50 / 0.85);
+  letter-spacing: 0.06em;
+  z-index: 3;
+}
+.wedding-back {
+  color: oklch(0.985 0.005 50 / 0.85);
+  transition: color .15s var(--ease);
+}
+.wedding-back:hover { color: var(--on-dark); }
+.wedding-year { letter-spacing: 0.1em; }
+
+.wedding-hero-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  padding: 0 24px;
+  max-width: min(1100px, 92vw);
+}
+.wedding-couple {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(48px, 8.5vw, 132px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--on-dark);
+  margin: 0;
+}
+.wedding-location {
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.985 0.005 50 / 0.8);
+}
+
+.wedding-desc {
+  padding: 96px 0;
+  background: var(--bg);
+}
+.wedding-desc p {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--text-2);
+  max-width: 56ch;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wedding-gallery {
+  display: flex; flex-direction: column;
+  gap: 32px;
+  padding: 0 0 96px;
+  align-items: center;
+}
+.wedding-gallery-image {
+  width: 100%;
+  max-width: 1200px;
+  background: var(--bg-3);
+  overflow: hidden;
+  border-radius: 4px;
+  padding: 0 24px;
+}
+.wedding-gallery-image img {
+  display: block;
+  border-radius: 4px;
+}
+@media (max-width: 720px) {
+  .wedding-gallery-image { padding: 0 16px; }
+  .wedding-desc { padding: 56px 20px; }
+  .wedding-desc p { font-size: 16px; }
+}
+
+.wedding-next {
+  margin-top: 0;
+  border-top: 1px solid var(--border);
+}
+.wedding-next-link {
+  display: block;
+  position: relative;
+}
+.wedding-next-eyebrow {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 40px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-2);
+  transition: color .2s var(--ease);
+}
+.wedding-next-link:hover .wedding-next-eyebrow { color: var(--accent); }
+.wedding-next-image {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  overflow: hidden;
+}
+.wedding-next-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.4s var(--ease);
+  filter: brightness(0.85);
+}
+.wedding-next-link:hover .wedding-next-image img { transform: scale(1.04); }
+.wedding-next-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg,
+    oklch(0.13 0.012 50 / 0.20) 0%,
+    oklch(0.13 0.012 50 / 0.05) 40%,
+    oklch(0.13 0.012 50 / 0.55) 100%);
+}
+.wedding-next-overlay {
+  position: absolute;
+  bottom: 56px; left: 0; right: 0;
+  text-align: center;
+  color: var(--on-dark);
+  z-index: 3;
+  padding: 0 24px;
+}
+.wedding-next-couple {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.wedding-next-location {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: oklch(0.985 0.005 50 / 0.8);
+}
+
+@media (max-width: 720px) {
+  .wedding-hero-meta-top { top: 88px; padding: 0 20px; }
+  .wedding-next-eyebrow { padding: 22px 20px; }
+  .wedding-next-overlay { bottom: 32px; }
+}
+
 /* ── Featured works (Avagyan-style cinematic scroll).
    Ogni matrimonio occupa un viewport intero. Titolo serif uppercase centrato,
    location mono sotto, counter top-left, anno top-right. Scrim sottile per

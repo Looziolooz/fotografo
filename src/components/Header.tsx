@@ -34,11 +34,10 @@ export default function Header() {
   const isActive = (href: string) =>
     pathname === href || (href !== "/" && pathname.startsWith(href));
 
-  /* The header is "transparent" only on routes that own their own dark hero
-     (currently /portfolio FeaturedWorks). Elsewhere we always show the solid
-     header so the brand stays readable on light pages. */
-  const wantsTransparent = isHome === false && pathname.startsWith("/portfolio");
-  const transparentClass = wantsTransparent && !scrolled ? "transparent" : "";
+  /* Header transparent solo su rotte con hero scuro full-bleed:
+     /portfolio (FeaturedWorks cinematic) e /portfolio/[slug] (wedding hero). */
+  const wantsTransparent = pathname.startsWith("/portfolio");
+  const transparentClass = !isHome && wantsTransparent && !scrolled ? "transparent" : "";
 
   return (
     <header className={`site-header ${transparentClass}`}>
