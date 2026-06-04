@@ -585,6 +585,128 @@ section { position: relative; }
   }
 }
 
+/* ── Featured works (Avagyan-style cinematic scroll).
+   Ogni matrimonio occupa un viewport intero. Titolo serif uppercase centrato,
+   location mono sotto, counter top-left, anno top-right. Scrim sottile per
+   leggibilità del testo bianco senza spegnere la foto. */
+.featured {
+  position: relative;
+  background: var(--surface-dark);
+  scroll-snap-type: y proximity;
+}
+.featured-intro,
+.featured-outro {
+  padding: 72px 0 24px;
+  background: var(--bg);
+}
+.featured-outro {
+  padding: 56px 0 96px;
+  background: var(--bg);
+  text-align: center;
+}
+.featured-intro .eyebrow {
+  color: var(--text-3);
+}
+
+.work-tile {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  width: 100%;
+  overflow: hidden;
+  color: var(--on-dark);
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.work-image {
+  position: absolute; inset: 0;
+  background: var(--surface-dark);
+}
+.work-image img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.88) contrast(1.02);
+  transition: transform 1.6s var(--ease);
+}
+.work-tile:hover .work-image img {
+  transform: scale(1.02);
+}
+
+.work-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      oklch(0.13 0.012 50 / 0.45) 0%,
+      oklch(0.13 0.012 50 / 0.05) 28%,
+      oklch(0.13 0.012 50 / 0.05) 60%,
+      oklch(0.13 0.012 50 / 0.55) 100%);
+}
+
+.work-meta-top {
+  position: absolute;
+  top: 32px; left: 0; right: 0;
+  padding: 0 32px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--font-mono); font-size: 11px;
+  color: oklch(0.985 0.005 50 / 0.85);
+  letter-spacing: 0.04em;
+  z-index: 3;
+}
+.work-counter { display: inline-flex; align-items: baseline; gap: 2px; }
+.work-counter-sep,
+.work-counter-total { color: oklch(0.985 0.005 50 / 0.5); }
+
+.work-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  padding: 0 24px;
+  max-width: min(900px, 92vw);
+}
+.work-couple {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(44px, 7.6vw, 108px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--on-dark);
+  margin: 0;
+}
+.work-location {
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: oklch(0.985 0.005 50 / 0.78);
+}
+
+@media (max-width: 720px) {
+  .work-meta-top { top: 18px; padding: 0 20px; }
+  .work-couple { font-size: clamp(36px, 9vw, 56px); }
+  .work-location { font-size: 11px; letter-spacing: 0.14em; margin-top: 16px; }
+}
+
+.featured-cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text);
+  padding: 14px 26px;
+  border: 1px solid var(--border-2);
+  border-radius: 999px;
+  transition: all .2s var(--ease);
+}
+.featured-cta:hover {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+  gap: 18px;
+}
+
 /* ── Filters ───────────────────────────────────── */
 .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 20px; }
 .pill {

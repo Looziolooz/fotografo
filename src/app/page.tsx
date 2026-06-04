@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Filosofia from "@/components/Filosofia";
 import StatsStrip from "@/components/StatsStrip";
+import FeaturedWorks from "@/components/FeaturedWorks";
 import Gallery from "@/components/Gallery";
 import Servizi from "@/components/Servizi";
 import Testimonianze from "@/components/Testimonianze";
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <Filosofia />
         <StatsStrip />
+        <FeaturedWorks />
         <Gallery />
         <Servizi />
         <Testimonianze />
